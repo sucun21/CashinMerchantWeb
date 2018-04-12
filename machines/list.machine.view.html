@@ -1,0 +1,180 @@
+<div id="wrapper">
+    <div class="container body">
+        <div class="main_container">
+            <div ng-include src="loadSidebarTemplate"></div> 
+            <!-- top -->
+            <div ng-include src="loadHeaderTemplate"></div> 
+            <!-- main content -->
+            <div class="right_col" role="main">                     
+                <div class="">                        
+                    <div class="row">
+                        <div class="x_panel ">
+                            <div class="x_content"> 
+                                <div class="row" >
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <label style="color: white;"> Từ khoá tìm kiếm</label>
+                                    <br>
+                                        <input  class="form-control" ng-model="itemNameSearch" type="text" name="item_name_filter" placeholder="Nhap tu khoa can tim kiem" />    
+                                    </div>                                    
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <br>
+                                        <button id="searchBtn" type="submit" class="btn btn-warning btn-circle btn-lg" ng-click="search()"><i class="fa fa-search"></i> </button>
+                                        <button type="button" class="btn btn-success btn-circle btn-lg" ng-click="openPopupAddItem(size)()"><i class="fa fa-plus"></i> </button>
+                                        <button type="button" ng-click="deleteItems()" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-times" ></i> </button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-condensed table-striped jambo_table">
+                                        <thead>
+                                            <tr> 
+                                                <th style="width: 50px;"><input style="display:none;" type="checkbox" name="chkAll" ></th>              
+                                                <th class="col-md-1 col-xs-1 col-sm-1">STT</th>
+                                                <th class="col-md-3 col-xs-3 col-sm-3">Ten May</th>
+                                                <th class="col-md-4 col-xs-4 col-sm-4">Dia chi dat may</th>                                          
+                                                <th class="col-md-2 col-xs-2 col-sm-2">Ngay Cap Nhat</th>                     
+                                                <th class="col-md-1 col-xs-1 col-sm-1">Tinh Trang</th> 
+                                                <th class="col-md-1 col-xs-1 col-sm-1">Chuc Nang</th> 
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="machine in listmachine | filter:itemNameSearch">
+                                               <td style="width: 50px;"><input type="checkbox" name="table_recorddelete_selecteds" ng-model="machine.delete_selected"></td>
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ $index+1 }}</td>
+                                                <td class="col-md-3 col-xs-3 col-sm-3">{{ machine.machine_name }}</td>
+                                                <td class="col-md-4 col-xs-4 col-sm-4">{{ machine.address }}</td>
+                                                <td class="col-md-2 col-xs-2 col-sm-2">{{ machine.time_update }}</td>
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ machine.action_type }}</td>
+                                                <td class="col-md-1 col-xs-1 col-sm-1">
+                                                    <div ng-click="openPopupEditItem(machine)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </div> 
+                                                </td>  
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" class="text-center" ng-show="listmachine.length === 0">
+                                                    <p  style="color:red;">Không có may nao</p>                    
+                                                </td>
+                                            </tr>
+                                        </tfoot>  
+                                    </table>
+                                </div> 
+<!--                                <div class="row">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <button type="button" class="btn btn-success btn-circle btn-lg" ng-click="openPopupAddItem()"><i class="fa fa-plus"></i>
+                                        </button>    
+                                        <button style="margin-left: 18px;" type="button" ng-click="deleteItems()" class="btn btn-danger btn-circle btn-lg"><i class="fa fa-times" ></i>
+                                        </button>                                      
+                                    </div>   
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div> 
+        </div>        
+    </div>    
+</div>
+<script type="text/ng-template" id="PopupAddItem.html">
+    <form name="addForm">
+        <div class="modal-header">
+            <h3 class="modal-title">Thêm thông tin may</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Tên May:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="name" class="form-control" ng-model="newItem.machine_name">
+                        <span class="red" ng-show="errItemIsNull">Không được để trống. Vui lòng nhập lại</span>
+                    </div>
+                </div>                                             
+            </div>
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Dia chi:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="address" class="form-control" ng-model="newItem.address">
+                    </div>
+                </div>                                             
+            </div>
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Tinh Trang:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="action_type" class="form-control" ng-model="newItem.action_type">
+                    </div>
+                </div>                                             
+            </div>
+        </div>
+        <div class="modal-footer form-group">
+            <div class="row">
+                <div class="col-md-5 col-xs-5 col-sm-5"><p style="color:red; font-style: italic; margin-top:5px;">(*)Cần cập nhật thông tin đầy đủ</p>
+                </div>
+                <div class="col-md-7 col-xs-7 col-sm-7">
+                    <button class="btn btn-primary" type="submit" ng-click="ok()">Lưu</button>
+                    <button class="btn btn-warning" type="submit" ng-click="cancel()">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/ng-template" id="PopupEditItem.html">
+    <form name="editForm">
+        <div class="modal-header">
+            <h3 class="modal-title">Sửa thông tin may</h3>
+        </div>
+        <div class="modal-body">    
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Tên May:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="name" class="form-control" ng-model="editItem.machine_name">
+                        <span class="red" ng-show="errItemIsNull">Không được để trống. Vui lòng nhập lại</span>
+                    </div>
+                </div>                                             
+            </div>
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Address:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="address" class="form-control" ng-model="editItem.address">
+                    </div>
+                </div>                                             
+            </div>
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <label>Action type:</label> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <input type="text" name="action_type" class="form-control" ng-model="editItem.action_type">
+                    </div>
+                </div>                                             
+            </div>
+        </div>
+        <div class="modal-footer form-group">
+            <div class="row">
+                <div class="col-md-5 col-xs-5 col-sm-5"><p style="color:red; font-style: italic; margin-top:5px;"></p>
+                </div>
+                <div class="col-md-7 col-xs-7 col-sm-7">
+                    <button class="btn btn-primary" type="submit" ng-click="edit()">Lưu</button>
+                    <button class="btn btn-warning" type="submit" ng-click="cancel()">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>

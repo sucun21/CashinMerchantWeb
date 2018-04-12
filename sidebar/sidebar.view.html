@@ -1,0 +1,43 @@
+ <div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+         <div class="navbar nav_title" style="border: 0;">
+            <a class="site_title" style="font-size: 20px;"><span>CASH - Admin</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile">
+          <div class="profile_pic">
+              <img src="assets/gentelella-master/images/img.jpg" alt="..." class="img-circle profile_img">
+          </div>
+          <div class="profile_info">
+            <span>Xin chào,</span>
+            <h2>{{globals.currentUser.username}}</h2>
+          </div>
+        </div> 
+        <!-- /menu profile quick info -->
+       <br/>
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" ng-controller="SidebarController">
+
+            <div class="menu_section">
+                <h3>Admin</h3>
+                <ul class="nav side-menu">
+                    <li ng-repeat="item in menuItemList" ng-class="{active: itemSelected.index == item.index}" ng-show=item.bshow>
+                      <a ng-href="{{item.submenu.length > 0 ? '': item.link}}" ng-click="onChangeSelected(item)"><i class="{{item.icon}}"></i>{{item.title}}
+                      <span ng-show="item.submenu.length > 0 " class="fa fa-chevron-down"></span>
+                      </a>
+
+                      <ul ng-show="item.submenu.length > 0 " class="nav child_menu"   ng-style="{'display': itemSelected.index == item.index ? 'block' : ''}">
+                        <li ng-repeat="itemsub in item.submenu" ng-class="{'current-page': subMenuSelected.index == itemsub.index}"  ng-show=itemsub.bshow>
+                            <a  ng-href="{{itemsub.link}}" ng-click="onChangeSubMenuSelected(itemsub)"><i class="{{itemsub.icon}}"></i>{{itemsub.title}}</a>
+                        </li>
+                      </ul>        
+                  </li>
+                </ul>                
+            </div>                      
+        </div>                   
+    </div>
+</div>

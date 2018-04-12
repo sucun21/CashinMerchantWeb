@@ -1,0 +1,145 @@
+<div id="wrapper">
+    <div class="container body">
+        <div class="main_container">
+            <div ng-include src="loadSidebarTemplate"></div> 
+            <!-- top -->
+            <div ng-include src="loadHeaderTemplate"></div> 
+            <!-- main content -->
+            <div class="right_col" role="main">                     
+                <div class="">                        
+                    <div class="row">
+                        <div class="x_panel ">
+                            <div class="x_content"> 
+                                <div class="row" >
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <label>Mã hóa đơn: </label> 
+                                        <input  class="form-control" ng-model="itemNameSearch" type="text" name="item_name_filter" placeholder="Nhap ma hoa don" />    
+                                    </div>  
+                                    <div class="col-md-3">                    
+                                        <label>Từ ngày: </label>                        
+                                        <div class='input-group date datepicker' id="fromDate" data-date-format="dd-mm-yyyy" ng-required="false">
+                                            <input type='text' class="form-control"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">                    
+                                        <label>Đến ngày: </label>                        
+                                        <div class='input-group date datepicker' id="toDate" data-date-format="dd-mm-yyyy" ng-required="false">
+                                            <input type='text' class="form-control"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Trạng thái: </label> 
+                                        <select class="form-control" ng-model="paymentSttSelectedID" ng-options="tran.tranStatusID as tran.tranStatusName for tran in tempListPaymentStatus">{{tran.tranStatusID}}</select>   
+                                    </div>                                   
+                                    <div class="col-md-3">
+                                        <br>
+                                        <button id="searchBtn" type="submit" class="btn btn-warning btn-circle btn-lg" ng-click="search()"><i class="fa fa-search"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-4 col-sm-4 col-md-offset-8 col-xs-offset-8 col-sm-offset-8 mrtop30" align="right">
+                                        <label>Số dòng hiển thị </label>
+                                        <select ng-model="totalOpenBoxPerPage" name = "totalOpenBoxPerPage" ng-options="openbox for openbox in totalOpenBoxPerPageList" ng-change="changePageSize()"></select>
+                                        <label>/Trang</label>
+                                    </div>
+                                </div> 
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-condensed table-striped jambo_table">
+                                        <thead>
+                                            <tr>                
+                                                <th class="col-md-1 col-xs-1 col-sm-1">STT</th>
+                                                <th class="col-md-2 col-xs-2 col-sm-2">Mã hóa đơn</th>
+                                                <th class="col-md-2 col-xs-2 col-sm-2">Mã ZaloPay</th>  
+                                                <th class="col-md-2 col-xs-2 col-sm-2">Ngày làm lệnh</th>     
+                                                <th class="col-md-1 col-xs-1 col-sm-1">Số tiền (VND) </th>  
+                                                <th class="col-md-1 col-xs-1 col-sm-1">Tên máy</th> 
+                                                <th class="col-md-2 col-xs-2 col-sm-2">Người nhận</th> 
+                                                <th class="col-md-1 col-xs-1 col-sm-1">Trạng thái</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="invoice in listinvoice|filter:{invoice_code:itemNameSearch}|orderBy: invoice_code">
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ $index+1 }}</td>
+                                                <td class="col-md-2 col-xs-2 col-sm-2">{{ invoice.invoice_code }}</td>
+                                                <td class="col-md-2 col-xs-2 col-sm-2">{{ invoice.zptransid }}</td>
+                                                <td class="col-md-2 col-xs-2 col-sm-2">{{ invoice.date_order }}</td>
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ invoice.amount|number:0 }}</td>  
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ invoice.machine_name}}</a></td>
+                                                <td class="col-md-2 col-xs-2 col-sm-2">{{ invoice.reciever }}</td>
+                                                <td class="col-md-1 col-xs-1 col-sm-1">{{ invoice.status }}</td>        
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" class="text-center" ng-show="listinvoice.length === 0">
+                                                    <p  style="color:red;">Không có hóa đơn nào</p>                    
+                                                </td>
+                                            </tr>
+                                        </tfoot>  
+                                    </table>
+                                     <div align="center">
+                                        <uib-pagination class="my-pagination" total-items="totalInvoice" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" boundary-link-numbers = "true" force-ellipses="true" items-per-page="totalOpenBoxPerPage" ng-change="loadPageChoose()"></uib-pagination>   
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div> 
+        </div>        
+    </div>    
+</div>
+<script type="text/javascript">
+    var toDay = new Date();
+    $("#fromDate").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        viewMode: "days",
+        minViewMode: "days"
+    }).datepicker('update', toDay)
+            //})
+            .on('clearDate', function (e) {
+                console.log("clear date");
+                var fromDate = "";
+                var myScope = angular.element(document.getElementById('wrapper')).scope();
+                myScope.fromDate = "";
+            })
+            .on('changeDate', function (e) {
+                console.log("change date");
+                console.log(e.date);
+                var fromDateValue = new Date(e.date);
+                var myScope = angular.element(document.getElementById('wrapper')).scope();
+                myScope.fromDate = fromDateValue;
+
+            });
+    $("#toDate").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        viewMode: "days",
+        minViewMode: "days"
+    }).datepicker('update', toDay)
+            //})
+            .on('clearDate', function (e) {
+                console.log("clear date");
+                var toDate = "";
+                var myScope = angular.element(document.getElementById('wrapper')).scope();
+                myScope.toDate = "";
+            })
+            .on('changeDate', function (e) {
+                console.log("change date");
+                console.log(e.date);
+                var toDateValue = new Date(e.date);
+                var myScope = angular.element(document.getElementById('wrapper')).scope();
+                myScope.toDate = toDateValue;
+
+            });
+</script>

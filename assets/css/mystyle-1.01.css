@@ -1,0 +1,283 @@
+
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+a.menu_links {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.width100 {
+	width:100px;
+}
+#cateSelect option[value="?"] {
+	display:none;
+}
+.main_container {
+    background: #2A3F54;
+}
+table {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /*height: 650px; */
+    /*overflow-x: scroll;*/
+    overflow: hidden;
+}
+
+
+table * {
+    box-sizing: inherit;
+    -moz-box-sizing: inherit;
+}
+
+thead {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+tbody {
+    overflow-y: hidden;
+    /*overflow-y: scroll;*/
+    display: inline-block;
+}
+
+thead > tr, tbody > tr, tfoot > tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+thead, tfoot {
+    flex-shrink: 0;
+}
+
+th, tbody td {
+    width: 100%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.tbl_popup {
+    width: 50%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+tfoot {
+    display: inline-block;
+}
+
+tfoot td {
+    width: 100%;
+    display: inline-block;
+}
+
+.huge {
+    font-size: 35px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+    margin-bottom: 12px;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+    padding: 2px 15px;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+    margin-bottom: 12px;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+    padding: 2px 15px;
+}
+.panel-heading .row{
+    margin-top: 3px;
+}
+.panel-heading .row .col-md-10{
+    font-size: 18px;
+    padding-left: 0px;
+}
+.panel-heading .row .col-md-9{
+    font-size: 18px;
+    padding-left: 0px;
+}
+.panel-red a {
+    color: #d9534f;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+    margin-bottom: 12px;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+    padding: 2px 15px;
+}
+
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}
+
+/*#8E44AD;*/
+.panel-purple {
+    border-color: #8E44AD;
+    margin-bottom: 12px;
+}
+
+.panel-purple .panel-heading {
+    border-color: #8E44AD;
+    color: #fff;
+    background-color: #8E44AD;
+    padding: 2px 15px;
+}
+
+.panel-purple a {
+    color: #8E44AD;
+}
+
+.btn-circle {
+    width: 35px;
+    height: 35px;
+    padding: 6px 0;
+    border-radius: 15px !important;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.428571429;
+}
+
+.btn-circle.btn-lg {
+    width: 45px;
+    height: 45px;
+    padding: 9px 12px;
+    border-radius: 25px !important;
+    font-size: 18px;
+    line-height: 1.33;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px !important;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.mrtop4{
+    margin-top: 4px;
+}
+.mrtop30{
+    margin-top: 10px;
+}
+.my_title_page{
+    color: #d76e30;
+}
+.aln_left{
+    text-align: left !important;
+}
+.aln_right{
+    text-align: right !important;
+}
+.center_vertical{
+
+   /* position: relative !important;
+    top: 50%;
+    transform: perspective(1px) translateY(-50%);*/
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 20%;
+}
+.parent-element {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.my_count_panel{
+    width: 100px;
+}
+.count_font_color{
+    color:rgba(0,0,0,0.54);
+}
+.cal_panel_heading{
+    text-align: center;
+    padding-left: 50px !important;
+}
+.panel_footer_green{
+    font-size: 14px;
+    color: green;
+}
+.panel_footer_yellow{
+    font-size: 14px;
+    color: #f0ad4e;
+}
+.panel_footer_purple{
+    font-size: 14px;
+    color: #8E44AD;
+}
+.panel_footer_red{
+    font-size: 14px;
+    color: #8E44AD;
+}
+
+.collapse_button {
+  padding: 3px 15px 7px  !important; }
+
+.error_notify {
+    color: red;
+    font-style: italic;
+}
+
+.itemStt {
+    display: block;    
+}
+.copyright{
+    font-size: 12px;
+    color: #9B9B9B;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+}
+#container_merchant{
+    min-width: 310px;
+    height: 400px;
+    margin: 0 auto;
+}
